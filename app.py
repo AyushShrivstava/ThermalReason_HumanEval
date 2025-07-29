@@ -201,31 +201,57 @@ if 'image_start_time' not in st.session_state:
 # Title
 st.title("Human Baseline Benchmarking")
 
-# Add admin section in sidebar for downloading results
+# Developer-only admin section with password protection
 st.sidebar.markdown("---")
-st.sidebar.markdown("**Admin Section**")
-if st.sidebar.button("Download Results CSV"):
+st.sidebar.markdown("**Developer Section**")
+
+# Initialize admin access state
+if 'admin_access' not in st.session_state:
+    st.session_state.admin_access = False
+
+# Admin login
+if not st.session_state.admin_access:
+    admin_password = st.sidebar.text_input("Developer Password:", type="password", key="admin_password")
+    if st.sidebar.button("Access Admin Panel"):
+        # Set your developer password here
+        DEVELOPER_PASSWORD = "thermal2025"  # Change this to your preferred password
+        
+        if admin_password == DEVELOPER_PASSWORD:
+            st.session_state.admin_access = True
+            st.sidebar.success("Admin access granted!")
+            st.rerun()
+        else:
+            st.sidebar.error("Incorrect password")
+else:
+    # Admin panel - only visible when authenticated
+    st.sidebar.success("🔓 Admin Panel Active")
+    
+    if st.sidebar.button("Download Results CSV"):
+        results_file = "human_evaluation_results.csv"
+        if os.path.exists(results_file):
+            df = pd.read_csv(results_file)
+            csv_data = df.to_csv(index=False)
+            st.sidebar.download_button(
+                label="Download CSV File",
+                data=csv_data,
+                file_name=f"human_evaluation_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv"
+            )
+            st.sidebar.success(f"Ready to download! {len(df)} records found.")
+        else:
+            st.sidebar.warning("No results file found yet.")
+    
+    # Display current results count (admin only)
     results_file = "human_evaluation_results.csv"
     if os.path.exists(results_file):
         df = pd.read_csv(results_file)
-        csv_data = df.to_csv(index=False)
-        st.sidebar.download_button(
-            label="Download CSV File",
-            data=csv_data,
-            file_name=f"human_evaluation_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-            mime="text/csv"
-        )
-        st.sidebar.success(f"Ready to download! {len(df)} records found.")
-    else:
-        st.sidebar.warning("No results file found yet.")
-
-# Display current results count
-results_file = "human_evaluation_results.csv"
-if os.path.exists(results_file):
-    df = pd.read_csv(results_file)
-    st.sidebar.info(f"Total responses: {len(df)}")
-    unique_users = df['user_id'].nunique() if 'user_id' in df.columns else 0
-    st.sidebar.info(f"Unique users: {unique_users}")
+        st.sidebar.info(f"Total responses: {len(df)}")
+        unique_users = df['user_id'].nunique() if 'user_id' in df.columns else 0
+        st.sidebar.info(f"Unique users: {unique_users}")
+    
+    if st.sidebar.button("Logout"):
+        st.session_state.admin_access = False
+        st.rerun()
 
 # Collect user information first
 if not st.session_state.user_info_collected:

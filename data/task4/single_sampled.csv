@@ -1,0 +1,51 @@
+image_path,type,correct_order,image_name
+Datasets/ThermEval/single/Thermal_91.JPG,single,"['nose', 'forehead', 'chest']",Thermal_91.JPG
+Datasets/ThermEval/single/Thermal_5.JPG,single,"['forehead', 'chest', 'nose']",Thermal_5.JPG
+Datasets/ThermEval/single/Thermal_186.JPG,single,"['nose', 'forehead', 'chest']",Thermal_186.JPG
+Datasets/ThermEval/single/Thermal_20.JPG,single,"['forehead', 'nose']",Thermal_20.JPG
+Datasets/ThermEval/single/Thermal_12.JPG,single,"['forehead', 'nose']",Thermal_12.JPG
+Datasets/ThermEval/single/Thermal_61.JPG,single,"['forehead', 'nose', 'chest']",Thermal_61.JPG
+Datasets/ThermEval/single/Thermal_102.JPG,single,"['nose', 'forehead', 'chest']",Thermal_102.JPG
+Datasets/ThermEval/single/Thermal_162.JPG,single,"['nose', 'forehead', 'chest']",Thermal_162.JPG
+Datasets/ThermEval/single/Thermal_59.JPG,single,"['forehead', 'nose', 'chest']",Thermal_59.JPG
+Datasets/ThermEval/single/Thermal_62.JPG,single,"['forehead', 'chest', 'nose']",Thermal_62.JPG
+Datasets/ThermEval/single/Thermal_189.JPG,single,"['nose', 'forehead', 'chest']",Thermal_189.JPG
+Datasets/ThermEval/single/Thermal_77.JPG,single,"['forehead', 'chest', 'nose']",Thermal_77.JPG
+Datasets/ThermEval/single/Thermal_210.JPG,single,"['nose', 'forehead', 'chest']",Thermal_210.JPG
+Datasets/ThermEval/single/Thermal_11.JPG,single,"['forehead', 'nose']",Thermal_11.JPG
+Datasets/ThermEval/single/Thermal_121.JPG,single,"['nose', 'chest', 'forehead']",Thermal_121.JPG
+Datasets/ThermEval/single/Thermal_221.JPG,single,"['nose', 'forehead', 'chest']",Thermal_221.JPG
+Datasets/ThermEval/single/Thermal_93.JPG,single,"['nose', 'forehead']",Thermal_93.JPG
+Datasets/ThermEval/single/Thermal_181.JPG,single,"['nose', 'chest', 'forehead']",Thermal_181.JPG
+Datasets/ThermEval/single/Thermal_188.JPG,single,"['forehead', 'nose', 'chest']",Thermal_188.JPG
+Datasets/ThermEval/single/Thermal_71.JPG,single,"['nose', 'chest']",Thermal_71.JPG
+Datasets/ThermEval/single/Thermal_95.JPG,single,"['nose', 'forehead', 'chest']",Thermal_95.JPG
+Datasets/ThermEval/single/Thermal_238.JPG,single,"['forehead', 'chest', 'nose']",Thermal_238.JPG
+Datasets/ThermEval/single/Thermal_76.JPG,single,"['forehead', 'chest', 'nose']",Thermal_76.JPG
+Datasets/ThermEval/single/Thermal_56.JPG,single,"['forehead', 'nose', 'chest']",Thermal_56.JPG
+Datasets/ThermEval/single/Thermal_237.JPG,single,"['forehead', 'nose']",Thermal_237.JPG
+Datasets/ThermEval/single/Thermal_15.JPG,single,"['forehead', 'nose', 'chest']",Thermal_15.JPG
+Datasets/ThermEval/single/Thermal_169.JPG,single,"['nose', 'forehead']",Thermal_169.JPG
+Datasets/ThermEval/single/Thermal_146.JPG,single,"['nose', 'forehead', 'chest']",Thermal_146.JPG
+Datasets/ThermEval/single/Thermal_217.JPG,single,"['nose', 'forehead', 'chest']",Thermal_217.JPG
+Datasets/ThermEval/single/Thermal_125.JPG,single,"['nose', 'chest', 'forehead']",Thermal_125.JPG
+Datasets/ThermEval/single/Thermal_83.JPG,single,"['nose', 'forehead', 'chest']",Thermal_83.JPG
+Datasets/ThermEval/single/Thermal_120.JPG,single,"['nose', 'chest', 'forehead']",Thermal_120.JPG
+Datasets/ThermEval/single/Thermal_60.JPG,single,"['forehead', 'nose', 'chest']",Thermal_60.JPG
+Datasets/ThermEval/single/Thermal_81.JPG,single,"['forehead', 'chest']",Thermal_81.JPG
+Datasets/ThermEval/single/Thermal_116.JPG,single,"['nose', 'forehead', 'chest']",Thermal_116.JPG
+Datasets/ThermEval/single/Thermal_38.JPG,single,"['nose', 'chest', 'forehead']",Thermal_38.JPG
+Datasets/ThermEval/single/Thermal_164.JPG,single,"['nose', 'forehead']",Thermal_164.JPG
+Datasets/ThermEval/single/Thermal_44.JPG,single,"['nose', 'chest', 'forehead']",Thermal_44.JPG
+Datasets/ThermEval/single/Thermal_180.JPG,single,"['forehead', 'nose', 'chest']",Thermal_180.JPG
+Datasets/ThermEval/single/Thermal_115.JPG,single,"['nose', 'forehead']",Thermal_115.JPG
+Datasets/ThermEval/single/Thermal_48.JPG,single,"['nose', 'forehead', 'chest']",Thermal_48.JPG
+Datasets/ThermEval/single/Thermal_67.JPG,single,"['nose', 'forehead', 'chest']",Thermal_67.JPG
+Datasets/ThermEval/single/Thermal_197.JPG,single,"['nose', 'chest', 'forehead']",Thermal_197.JPG
+Datasets/ThermEval/single/Thermal_227.JPG,single,"['nose', 'chest']",Thermal_227.JPG
+Datasets/ThermEval/single/Thermal_222.JPG,single,"['nose', 'forehead', 'chest']",Thermal_222.JPG
+Datasets/ThermEval/single/Thermal_122.JPG,single,"['nose', 'chest', 'forehead']",Thermal_122.JPG
+Datasets/ThermEval/single/Thermal_92.JPG,single,"['nose', 'forehead', 'chest']",Thermal_92.JPG
+Datasets/ThermEval/single/Thermal_182.JPG,single,"['forehead', 'nose']",Thermal_182.JPG
+Datasets/ThermEval/single/Thermal_13.JPG,single,"['forehead', 'chest', 'nose']",Thermal_13.JPG
+Datasets/ThermEval/single/Thermal_173.JPG,single,"['forehead', 'nose']",Thermal_173.JPG

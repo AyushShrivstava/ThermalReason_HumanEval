@@ -210,7 +210,7 @@ if st.sidebar.button("Download Results CSV"):
         df = pd.read_csv(results_file)
         csv_data = df.to_csv(index=False)
         st.sidebar.download_button(
-            label="📥 Download CSV File",
+            label="Download CSV File",
             data=csv_data,
             file_name=f"human_evaluation_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
             mime="text/csv"
@@ -223,9 +223,9 @@ if st.sidebar.button("Download Results CSV"):
 results_file = "human_evaluation_results.csv"
 if os.path.exists(results_file):
     df = pd.read_csv(results_file)
-    st.sidebar.info(f"📊 Total responses: {len(df)}")
+    st.sidebar.info(f"Total responses: {len(df)}")
     unique_users = df['user_id'].nunique() if 'user_id' in df.columns else 0
-    st.sidebar.info(f"👥 Unique users: {unique_users}")
+    st.sidebar.info(f"Unique users: {unique_users}")
 
 # Collect user information first
 if not st.session_state.user_info_collected:

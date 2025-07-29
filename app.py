@@ -201,6 +201,32 @@ if 'image_start_time' not in st.session_state:
 # Title
 st.title("Human Baseline Benchmarking")
 
+# Add admin section in sidebar for downloading results
+st.sidebar.markdown("---")
+st.sidebar.markdown("**Admin Section**")
+if st.sidebar.button("Download Results CSV"):
+    results_file = "human_evaluation_results.csv"
+    if os.path.exists(results_file):
+        df = pd.read_csv(results_file)
+        csv_data = df.to_csv(index=False)
+        st.sidebar.download_button(
+            label="📥 Download CSV File",
+            data=csv_data,
+            file_name=f"human_evaluation_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+            mime="text/csv"
+        )
+        st.sidebar.success(f"Ready to download! {len(df)} records found.")
+    else:
+        st.sidebar.warning("No results file found yet.")
+
+# Display current results count
+results_file = "human_evaluation_results.csv"
+if os.path.exists(results_file):
+    df = pd.read_csv(results_file)
+    st.sidebar.info(f"📊 Total responses: {len(df)}")
+    unique_users = df['user_id'].nunique() if 'user_id' in df.columns else 0
+    st.sidebar.info(f"👥 Unique users: {unique_users}")
+
 # Collect user information first
 if not st.session_state.user_info_collected:
     st.header("Welcome! Please provide your information:")

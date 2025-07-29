@@ -419,7 +419,7 @@ if task_type == "thermal_classification":
     with col1:
         # Display image
         image = Image.open(image_path)
-        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
     
     with col2:
         st.write("Your Answer:")
@@ -508,7 +508,7 @@ elif task_type == "people_counting":
     with col1:
         # Display image
         image = Image.open(image_path)
-        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
     
     with col2:
         st.write("Your Answer:")
@@ -571,7 +571,7 @@ elif task_type == "thermal_reasoning_1":
     with col1:
         # Display image
         image = Image.open(image_path)
-        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
     
     with col2:
         st.write("Your Answer:")
@@ -665,7 +665,7 @@ elif task_type == "thermal_reasoning_2":
     with col1:
         # Display image
         image = Image.open(image_path)
-        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
     
     with col2:
         st.write("Your Answer:")
@@ -747,7 +747,7 @@ elif task_type == "arrow_temp_estimation":
     with col1:
         # Draw arrow on image and display
         image_with_arrow = draw_arrow_on_image(image_path, x_coord, y_coord)
-        st.image(image_with_arrow, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image_with_arrow, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
         st.caption(f"Arrow points to coordinates: ({x_coord}, {y_coord})")
     
     with col2:
@@ -824,7 +824,7 @@ elif task_type == "semantic_temp_estimation":
     with col1:
         # Display image
         image = Image.open(image_path)
-        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
     
     with col2:
         st.write("Your Answer:")
@@ -901,7 +901,7 @@ elif task_type == "comparative_temp_estimation":
     with col1:
         # Display image
         image = Image.open(image_path)
-        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_column_width=True)
+        st.image(image, caption=f"Image {current_index + 1}/{total_images}", use_container_width=True)
     
     with col2:
         st.write("Your Answer:")

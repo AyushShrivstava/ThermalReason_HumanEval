@@ -1,0 +1,2 @@
+user_id,name,age,occupation,timestamp,task,image_name,answer,correct_answer,response_time_milliseconds
+b10d04c0,Ayush,28,PhD,2025-07-30 17:43:06,Modality identification,FLIR_RGB_video-2BARff2EP7ZWkiF7n-frame-002932-KDg383gqjvFzapRPw.jpg,Not Thermal,Not Thermal,3306.2

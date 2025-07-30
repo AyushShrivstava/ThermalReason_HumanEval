@@ -159,7 +159,7 @@ def get_temperature_estimation_data(csv_file, task_type):
     return task_data
 
 # Function to save results to CSV
-def save_results(user_id, user_info, task, image_name, answer, response_time=None):
+def save_results(user_id, user_info, task, image_name, answer, response_time=None, correct_answer=None):
     results_file = "human_evaluation_results.csv"
     
     # Create new row
@@ -172,6 +172,7 @@ def save_results(user_id, user_info, task, image_name, answer, response_time=Non
         'task': task,
         'image_name': image_name,
         'answer': answer,
+        'correct_answer': correct_answer,
         'response_time_milliseconds': response_time
     }
     
@@ -490,7 +491,8 @@ if task_type == "thermal_classification":
                 task=task,
                 image_name=current_image_name,
                 answer="Thermal",
-                response_time=response_time
+                response_time=response_time,
+                correct_answer="Not Thermal" if "RGB" in current_image_name else "Thermal"
             )
             
             st.success(f"Answer saved: Thermal (Time: {response_time}ms)")
@@ -521,7 +523,8 @@ if task_type == "thermal_classification":
                 task=task,
                 image_name=current_image_name,
                 answer="Not Thermal",
-                response_time=response_time
+                response_time=response_time,
+                correct_answer="Not Thermal" if "RGB" in current_image_name else "Thermal"
             )
             
             st.success(f"Answer saved: Not Thermal (Time: {response_time}ms)")
@@ -574,14 +577,15 @@ elif task_type == "people_counting":
             start_time = st.session_state[f"start_time_{timer_key}"]
             response_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
             
-            # Save result
+            # Save result (for people counting, we don't have ground truth in the current setup)
             save_results(
                 user_id=st.session_state.user_id,
                 user_info=st.session_state.user_info,
                 task=task,
                 image_name=current_image_name,
                 answer=str(count),
-                response_time=response_time
+                response_time=response_time,
+                correct_answer=None  # TODO: Add ground truth data for people counting
             )
             
             st.success(f"Count saved: {count} (Time: {response_time}ms)")
@@ -606,6 +610,7 @@ elif task_type == "thermal_reasoning_1":
     image_path = current_data['image_path']
     current_image_name = current_data['image_name']
     body_part = current_data['body_part']
+    correct_answer = current_data['correct_answer']
     question = current_data['question']
     
     # Display question above the image
@@ -635,17 +640,21 @@ elif task_type == "thermal_reasoning_1":
             start_time = st.session_state[f"start_time_{timer_key}"]
             response_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
             
+            # Create answer with body part prefix (clean format)
+            answer = f"{body_part}_Left"
+            
             # Save result
             save_results(
                 user_id=st.session_state.user_id,
                 user_info=st.session_state.user_info,
                 task=task,
                 image_name=current_image_name,
-                answer="Left",
-                response_time=response_time
+                answer=answer,
+                response_time=response_time,
+                correct_answer=correct_answer
             )
             
-            st.success(f"Answer saved: Left Person (Time: {response_time}ms)")
+            st.success(f"Answer saved: {answer} (Time: {response_time}ms)")
             
             # Clean up timing data
             del st.session_state[f"start_time_{timer_key}"]
@@ -666,17 +675,21 @@ elif task_type == "thermal_reasoning_1":
             start_time = st.session_state[f"start_time_{timer_key}"]
             response_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
             
+            # Create answer with body part prefix (clean format)
+            answer = f"{body_part}_Right"
+            
             # Save result
             save_results(
                 user_id=st.session_state.user_id,
                 user_info=st.session_state.user_info,
                 task=task,
                 image_name=current_image_name,
-                answer="Right",
-                response_time=response_time
+                answer=answer,
+                response_time=response_time,
+                correct_answer=correct_answer
             )
             
-            st.success(f"Answer saved: Right Person (Time: {response_time}ms)")
+            st.success(f"Answer saved: {answer} (Time: {response_time}ms)")
             
             # Clean up timing data
             del st.session_state[f"start_time_{timer_key}"]
@@ -746,6 +759,7 @@ elif task_type == "thermal_reasoning_2":
             
             # Save result as comma-separated string
             answer = ",".join(ordered_parts)
+            correct_answer_str = ",".join(correct_order)
             
             save_results(
                 user_id=st.session_state.user_id,
@@ -753,7 +767,8 @@ elif task_type == "thermal_reasoning_2":
                 task=task,
                 image_name=current_image_name,
                 answer=answer,
-                response_time=response_time
+                response_time=response_time,
+                correct_answer=correct_answer_str
             )
             
             st.success(f"Order saved: {' → '.join(ordered_parts)} (Time: {response_time}ms)")
@@ -821,19 +836,23 @@ elif task_type == "arrow_temp_estimation":
             start_time = st.session_state[f"start_time_{timer_key}"]
             response_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
             
+            # Create answer with coordinates prefix (clean format)
+            answer = f"{x_coord}_{y_coord}_{estimated_temp}"
+            
             # Save result
             save_results(
                 user_id=st.session_state.user_id,
                 user_info=st.session_state.user_info,
                 task=task,
                 image_name=current_image_name,
-                answer=str(estimated_temp),
-                response_time=response_time
+                answer=answer,
+                response_time=response_time,
+                correct_answer=str(actual_temp)
             )
             
             # Calculate error for feedback
             error = abs(estimated_temp - actual_temp)
-            st.success(f"Estimate saved: {estimated_temp}°C (Time: {response_time}ms)")
+            st.success(f"Estimate saved: {answer} (Time: {response_time}ms)")
             st.info(f"Actual temperature: {actual_temp}°C | Error: {error:.1f}°C")
             
             # Clean up timing data
@@ -897,19 +916,23 @@ elif task_type == "semantic_temp_estimation":
             start_time = st.session_state[f"start_time_{timer_key}"]
             response_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
             
+            # Create answer with body part prefix (clean format)
+            answer = f"{body_part}_{estimated_temp}"
+            
             # Save result
             save_results(
                 user_id=st.session_state.user_id,
                 user_info=st.session_state.user_info,
                 task=task,
                 image_name=current_image_name,
-                answer=str(estimated_temp),
-                response_time=response_time
+                answer=answer,
+                response_time=response_time,
+                correct_answer=str(actual_temp)
             )
             
             # Calculate error for feedback
             error = abs(estimated_temp - actual_temp)
-            st.success(f"Estimate saved: {estimated_temp}°C (Time: {response_time}ms)")
+            st.success(f"Estimate saved: {answer} (Time: {response_time}ms)")
             st.info(f"Actual temperature: {actual_temp:.1f}°C | Error: {error:.1f}°C")
             
             # Clean up timing data
@@ -974,19 +997,23 @@ elif task_type == "comparative_temp_estimation":
             start_time = st.session_state[f"start_time_{timer_key}"]
             response_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
             
+            # Create answer with side and body part prefix (clean format)
+            answer = f"{side}_{body_part}_{estimated_temp}"
+            
             # Save result
             save_results(
                 user_id=st.session_state.user_id,
                 user_info=st.session_state.user_info,
                 task=task,
                 image_name=current_image_name,
-                answer=str(estimated_temp),
-                response_time=response_time
+                answer=answer,
+                response_time=response_time,
+                correct_answer=str(actual_temp)
             )
             
             # Calculate error for feedback
             error = abs(estimated_temp - actual_temp)
-            st.success(f"Estimate saved: {estimated_temp}°C (Time: {response_time}ms)")
+            st.success(f"Estimate saved: {answer} (Time: {response_time}ms)")
             st.info(f"Actual temperature: {actual_temp:.1f}°C | Error: {error:.1f}°C")
             
             # Clean up timing data
